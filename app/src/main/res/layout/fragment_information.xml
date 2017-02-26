@@ -1,0 +1,53 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="umg.bryang8.con.converter.Information">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Creadores:"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:textSize="18dp"
+        android:textColor="@color/colorPrimaryDark"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Universidad Mariano Gálvez"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingeniería en Sistemas"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="80dp"
+        android:textSize="16dp"/>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Primer Semestre - Sección 'F'"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="110dp"
+        android:textSize="16dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bryan Daniel Gatica Flores    9490-17-5940"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="140dp"
+        android:textSize="16dp"
+        android:layout_marginBottom="20dp"/>
+
+</FrameLayout>

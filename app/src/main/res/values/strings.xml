@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Convertidor Bases Numéricas</string>
+    <string name="action_settings">Settings</string>
+    <string name="hint_number">Numero original</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_convert">Convertir</string>
+    <string name="err_msg_name">Ingresa un número</string>
+    <string name="err_msg_email">Enter valid email address</string>
+    <string name="err_msg_password">Enter the password</string>
+    <string-array name="android_dropdown_arrays">
+        <item>Base numérica</item>
+        <item>Decimal</item>
+        <item>Binaria</item>
+        <item>Octal</item>
+        <item>Hexadecimal</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

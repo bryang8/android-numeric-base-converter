@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Convertidor Bases Numéricas</string>
+    <string name="app_name">Convertidor</string>
     <string name="action_settings">Settings</string>
     <string name="hint_number">Numero original</string>
     <string name="hint_email">Email</string>

@@ -7,6 +7,7 @@
     <string name="btn_convert">Convertir</string>
     <string name="err_msg_name">Ingresa un número</string>
     <string name="err_msg_email">Enter valid email address</string>
+    <string name="procedure">Procedimiento</string>
     <string name="err_msg_password">Enter the password</string>
     <string-array name="android_dropdown_arrays">
         <item>Base numérica</item>

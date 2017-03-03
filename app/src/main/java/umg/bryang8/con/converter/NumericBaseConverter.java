@@ -13,13 +13,21 @@ public class NumericBaseConverter {
         DECIMAL, BINARIA, OCTAGONAL, HEXADECIMAL
     }
 
+    private String procedimiento = "";
+
     private BASE baseOriginal,baseDeseada;
+
+    public String getProcedimiento(){
+        return procedimiento;
+    }
 
     public String convert(String number, Integer typeOriginal, Integer typeDeseado){
         setOriginal(typeOriginal);
         setBaseDeseada(typeDeseado);
+        procedimiento = "";
 
         number = convertToBase(convertToDecimal(number.toUpperCase()));
+        //System.out.println(procedimiento);
         return number;
     }
 
@@ -58,15 +66,25 @@ public class NumericBaseConverter {
     }
 
     public long convertToDecimal(String number){
-        switch (baseOriginal){
-            case BINARIA:
-                return (number.matches("[0-1]+")) ? baseToDecimal(number, 2) : -1;
-            case OCTAGONAL:
-                return (number.matches("[0-7]+")) ? baseToDecimal(number, 8) : -1;
-            case DECIMAL:
-                return (number.matches("[0-9]+")) ? Long.parseLong(number) : -1;
-            case HEXADECIMAL:
-                return (number.matches("[0-9A-F]+")) ? baseToDecimal(number, 16) : -1;
+        try{
+
+            switch (baseOriginal){
+                case BINARIA:
+                    procedimiento += "Convirtiendo de binario a decimal. \n";
+                    return (number.matches("[0-1]+")) ? baseToDecimal(number, 2) : -1;
+                case OCTAGONAL:
+                    procedimiento += "Convirtiendo de octal a decimal. \n";
+                    return (number.matches("[0-7]+")) ? baseToDecimal(number, 8) : -1;
+                case DECIMAL:
+                    procedimiento += "Convirtiendo de decimal a decimal. \n";
+                    return (number.matches("[0-9]+")) ? Long.parseLong(number) : -1;
+                case HEXADECIMAL:
+                    procedimiento += "Convirtiendo de hexadecimal a decimal. \n";
+                    return (number.matches("[0-9A-F]+")) ? baseToDecimal(number, 16) : -1;
+            }
+        }
+        catch (NumberFormatException ex){
+            return -1;
         }
         return -1;
     }
@@ -77,37 +95,59 @@ public class NumericBaseConverter {
         }
         switch (baseDeseada){
             case BINARIA:
-                return decimalToBase(number, 2);
+                procedimiento += "Convirtiendo de decimal a binario. \n";
+                return decimalToBase(number, 2, "Binario");
             case OCTAGONAL:
-                return decimalToBase(number, 8);
+                procedimiento += "Convirtiendo de decimal a octal. \n";
+                return decimalToBase(number, 8, "Octal");
             case DECIMAL:
+                procedimiento += "Convirtiendo de decimal a decimal. \n";
                 return String.valueOf(number);
             case HEXADECIMAL:
-                return decimalToBase(number, 16);
+                procedimiento += "Convirtiendo de decimal a hexadecimal. \n";
+                return decimalToBase(number, 16, "Hexadecimal");
         }
         return null;
     }
 
     public long baseToDecimal(String number, Integer base){
+        procedimiento += "Decimal = 0 \n";
         int result = 0;
         for (int i = 0; i<number.length();i++){
-            result +=  getNumber(number.charAt(i)) * Math.pow(base,number.length() -i - 1);
+            procedimiento += "Decimal = " + result + " + (";
+            int temp = getNumber(number.charAt(i));
+            procedimiento += temp + " x "+base+"^"+(number.length() -i - 1)+")\n";
+            temp *= Math.pow(base,number.length() -i - 1);
+            result += temp;
         }
+        procedimiento += "Decimal = " +result + "\n";
         return result;
     }
 
-    public String decimalToBase(long number, Integer base){
+    public String decimalToBase(long number, Integer base, String _base){
         String result = "";
         long sobra;
         char [] digits = Arrays.copyOfRange(array, 0, base );
+        procedimiento += "Dígitos = {" + Arrays.toString(digits) + "}\n";
+        procedimiento += _base + " = 0\n";
 
         while(number>0)
         {
+            procedimiento += "\tnúmero = " + number + "\n";
             sobra  = number % base;
+
+            procedimiento += "\tsobra = residuo de " +number + "/" +base+"\n";
+            procedimiento += "\tsobra = "+sobra+"\n";
+
+            procedimiento += "\t" +_base + " = " + "digito: " + sobra;
+            procedimiento += (!result.isEmpty()) ? " concatenado: " +  result + "\n" : "\n";
+            procedimiento += _base + " = " + digits[(int)sobra] +  result + "\n";
+
             result = digits[(int)sobra] + result;
             number = number / base;
-        }
 
+            procedimiento += (number != 0) ? "\tnumero = "+number+" / "+base+"\n" : "";
+        }
         //System.out.println(result);
         return result;
     }
@@ -115,4 +155,5 @@ public class NumericBaseConverter {
     public Integer getNumber(char number){
         return new String(array).indexOf(number);
     }
+
 }

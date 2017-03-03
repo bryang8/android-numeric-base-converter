@@ -1,5 +1,6 @@
 package umg.bryang8.con.converter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -68,7 +69,25 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
+        Button btnMostarProc = (Button)findViewById(R.id.btnShowProcedure);
+        btnMostarProc.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View arg0) {
+                // TODO Auto-generated method stub
+               openProcedure();
+            }
+
+        });
     }
+
+    private void openProcedure() {
+        Intent myIntent = new Intent(this, ProcedureActivity.class);
+        myIntent.putExtra("procedimiento", convert.getProcedimiento());
+        startActivity(myIntent);
+    }
+
 
     private void convert() {
         if (!validateName()) {
@@ -91,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         resultText.setText("Resultado: " + result);
+        System.out.println(convert.getProcedimiento());
     }
 
     private boolean validateName() {

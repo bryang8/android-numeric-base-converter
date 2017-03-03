@@ -1,6 +1,5 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/coordinator_layout">
@@ -20,7 +19,7 @@
             android:id="@+id/btnShowDialog"
             android:layout_height="55dp"
             android:layout_gravity="end"
-            android:drawableLeft="@drawable/ic_error_outline_black_24dp"
+            android:drawableRight="@drawable/ic_error_outline_black_24dp"
             style="?android:attr/borderlessButtonStyle"
             />
 
@@ -34,7 +33,6 @@
                 android:id="@+id/input_original"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
                 android:hint="@string/hint_number"
                 android:maxLength="20"/>
         </android.support.design.widget.TextInputLayout>
@@ -92,6 +90,26 @@
             android:textSize="20dp"/>
 
 
-    </LinearLayout>
 
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnShowProcedure"
+            android:layout_gravity="end"
+            android:text="@string/procedure"
+            android:textColor="@color/colorAccent"
+            android:padding="16dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+    </RelativeLayout>
+    <!--
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" /> -->
 </android.support.design.widget.CoordinatorLayout>

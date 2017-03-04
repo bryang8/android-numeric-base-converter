@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btnMostrarDialog = (Button)findViewById(R.id.btnShowDialog);
+        /*Button btnMostrarDialog = (Button)findViewById(R.id.btnShowDialog);
         btnMostrarDialog.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 new Information().show(getSupportFragmentManager(), "Creadores");
             }
 
-        });
+        });*/
 
         Button btnMostarProc = (Button)findViewById(R.id.btnShowProcedure);
         btnMostarProc.setOnClickListener(new View.OnClickListener(){

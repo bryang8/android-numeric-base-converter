@@ -33,16 +33,16 @@ public class NumericBaseConverter {
 
     public void setOriginal(Integer type){
         switch (type){
-            case 1:
+            case 10:
                 baseOriginal = BASE.DECIMAL;
                 break;
             case 2:
                 baseOriginal = BASE.BINARIA;
                 break;
-            case 3:
+            case 8:
                 baseOriginal= BASE.OCTAGONAL;
                 break;
-            case 4:
+            case 16:
                 baseOriginal = BASE.HEXADECIMAL;
                 break;
         }
@@ -50,16 +50,16 @@ public class NumericBaseConverter {
 
     public void setBaseDeseada(Integer type){
         switch (type){
-            case 1:
+            case 10:
                 baseDeseada = BASE.DECIMAL;
                 break;
             case 2:
                 baseDeseada = BASE.BINARIA;
                 break;
-            case 3:
+            case 8:
                 baseDeseada= BASE.OCTAGONAL;
                 break;
-            case 4:
+            case 16:
                 baseDeseada = BASE.HEXADECIMAL;
                 break;
         }

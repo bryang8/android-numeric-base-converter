@@ -2,6 +2,7 @@ package umg.bryang8.con.converter;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IntegerRes;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
@@ -20,11 +21,11 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private NumericBaseConverter convert = new NumericBaseConverter();
-    private EditText inputOriginal;
-    private TextInputLayout inputLayoutOriginal;
+    private EditText inputOriginal, inputBaseOriginal, inputBaseDeseada;
+    private TextInputLayout inputLayoutOriginal, inputLayoutBaseOriginal, inputLayoutBaseDeseada;
     private CoordinatorLayout coordinatorLayout;
     private Button btnConvert;
-    private Spinner spnBaseOriginal, spnBaseDeseada;
+    //private Spinner spnBaseOriginal, spnBaseDeseada;
     private Integer selectedBaseOriginal, selectedBaseDeseada;
     private TextView resultText;
 
@@ -35,14 +36,21 @@ public class MainActivity extends AppCompatActivity {
 
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_layout);
 
+        /*
         spnBaseOriginal= (Spinner) findViewById(R.id.spn_base_original);
         spnBaseOriginal.setOnItemSelectedListener(new ItemSelectedListener(0));
 
         spnBaseDeseada = (Spinner) findViewById(R.id.spn_base_deseada);
         spnBaseDeseada.setOnItemSelectedListener(new ItemSelectedListener(1));
 
+        */
         inputLayoutOriginal = (TextInputLayout) findViewById(R.id.input_layout_name);
+        inputLayoutBaseOriginal = (TextInputLayout) findViewById(R.id.input_layout_base_original);
+        inputLayoutBaseDeseada = (TextInputLayout) findViewById(R.id.input_layout_base_deseada);
+
         inputOriginal= (EditText) findViewById(R.id.input_original);
+        inputBaseOriginal= (EditText) findViewById(R.id.input_base_o);
+        inputBaseDeseada= (EditText) findViewById(R.id.input_base_d);
 
         inputOriginal.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
 
@@ -90,25 +98,27 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void convert() {
-        if (!validateName()) {
+        if (!validateName() || !validateBaseO() || !validateBaseD()) {
             return;
         }
 
-        if (selectedBaseOriginal == null){
-            Snackbar.make(coordinatorLayout,"Selecciona la base numérica a convertir" , Snackbar.LENGTH_SHORT).show();
+        String
+                baseO = inputBaseOriginal.getText().toString().trim(),
+                baseD =inputBaseDeseada.getText().toString().trim();
+        if (baseO == baseD){
+            Snackbar.make(coordinatorLayout,"Debe seleccionar dos bases numéricas diferentes" , Snackbar.LENGTH_SHORT).show();
             return;
         }
-        if (selectedBaseDeseada == null){
-            Snackbar.make(coordinatorLayout,"Selecciona la base numérica original" , Snackbar.LENGTH_SHORT).show();
-            return;
-        }
+
         String result = convert.convert(String.valueOf(inputOriginal.getText()),
-                selectedBaseOriginal,
-                selectedBaseDeseada);
+                Integer.parseInt(baseO),
+                Integer.parseInt(baseD));
+
         if (result == null || result.equals("null")){
             Snackbar.make(coordinatorLayout,"Formato de número inválido" , Snackbar.LENGTH_SHORT).show();
             return;
         }
+
         resultText.setText("Resultado: " + result);
         System.out.println(convert.getProcedimiento());
     }
@@ -117,11 +127,53 @@ public class MainActivity extends AppCompatActivity {
         if (inputOriginal.getText().toString().trim().isEmpty()) {
             inputLayoutOriginal.setError(getString(R.string.err_msg_name));
             requestFocus(inputOriginal);
+            inputLayoutOriginal.setErrorEnabled(true);
             return false;
         } else {
             inputLayoutOriginal.setErrorEnabled(false);
         }
 
+        return true;
+    }
+
+    private boolean validateBaseO() {
+        String string = inputBaseOriginal.getText().toString().trim();
+        if (string.isEmpty()) {
+            inputLayoutBaseOriginal.setError("Ingrese la base original");
+            requestFocus(inputBaseOriginal);
+            inputLayoutBaseOriginal.setErrorEnabled(true);
+            return false;
+        }
+        else if (!string.equals("2") && !string.equals("8") && !string.equals("10") && !string.equals("16")){
+            inputLayoutBaseOriginal.setError("Solo se aceptan 2,8,10,16");
+            requestFocus(inputBaseOriginal);
+            inputLayoutBaseOriginal.setErrorEnabled(true);
+            return false;
+        }
+        else {
+            inputLayoutBaseOriginal.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
+    private boolean validateBaseD() {
+        String string = inputBaseDeseada.getText().toString().trim();
+        if (string.isEmpty()) {
+            inputLayoutBaseDeseada.setError("Ingrese la base deseada");
+            requestFocus(inputBaseDeseada);
+            inputLayoutBaseDeseada.setErrorEnabled(true);
+            return false;
+        }
+        else if (!string.equals("2") && !string.equals("8") && !string.equals("10") && !string.equals("16")){
+            inputLayoutBaseDeseada.setError("Solo se aceptan 2,8,10,16");
+            requestFocus(inputBaseDeseada);
+            inputLayoutBaseDeseada.setErrorEnabled(true);
+            return false;
+        }
+        else {
+            inputLayoutBaseDeseada.setErrorEnabled(false);
+        }
         return true;
     }
 
@@ -157,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public class ItemSelectedListener implements AdapterView.OnItemSelectedListener {
+    /*public class ItemSelectedListener implements AdapterView.OnItemSelectedListener {
 
         //get strings of first item
         private String firstItem;
@@ -192,6 +244,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-    }
+    } */
 
 }
